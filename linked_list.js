@@ -5,7 +5,8 @@ class LinkedList{
 
 
     append(value){
-
+        
+        //add node to end of linked list
         let newNode = new node(value)
         let start = this.head
 
@@ -21,7 +22,8 @@ class LinkedList{
     }
 
     prepend(value){
-        
+        //add node to start of linked list
+
         let newNode = new node(value)
 
         //if list is empty
@@ -35,6 +37,8 @@ class LinkedList{
     }
 
     size(){
+        //return number of nodes in linked list
+
         let size = 0
         let start = this.head
         
@@ -47,10 +51,14 @@ class LinkedList{
     }
 
     head1(){
+        //returns first node of linked list
+
         return (this.head)
     }
 
     tail(){
+        //returns last node of linked list
+
         let start = this.head
 
         while(start.nextNode != null){
@@ -59,6 +67,7 @@ class LinkedList{
         return start
     }
     at(index){
+        //returns node of linked list at given index
 
         let start = this.head
         let i = 0
@@ -70,6 +79,8 @@ class LinkedList{
     }
 
     pop(){
+        //remove last node of linked list   
+
         let start = this.head
 
         if(this.size() == 1){
@@ -84,7 +95,8 @@ class LinkedList{
     }
 
     contains(value){
-        
+        //checks if linked list contains given value
+
         let start = this.head
         while(start){
             if(start.value == value){
@@ -97,6 +109,7 @@ class LinkedList{
         return false
     }
     find(value){
+        //finds index at which value is located at in linked list
 
         let start = this.head
         let length = this.size()
@@ -110,7 +123,8 @@ class LinkedList{
     }
 
     toString(){
-        
+        //represents linked list in form of a neat string
+
         let start = this.head
         let str1 = ''
         while(start){
@@ -122,6 +136,8 @@ class LinkedList{
     }
 
     insertAt(value, index){
+        //insert node of value at index in the linked list
+
         let newNode = new node(value)
 
         let start = this.head
@@ -145,6 +161,8 @@ class LinkedList{
     }
 
     removeAt(index){
+        //removes node from certain index from linked list
+
         let start = this.head
         let length = this.size() - 1
 
@@ -174,6 +192,7 @@ class node{
 }
 
 
+//test cases
 let list = new LinkedList()
 
 list.append(8)
