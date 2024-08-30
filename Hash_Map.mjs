@@ -26,6 +26,7 @@ class HashMap{
 
     set(key, value){
 
+    
         let hashCode = this.hash(key)
 
         if (hashCode < 0 || hashCode >= this.arr.length) {
@@ -38,7 +39,7 @@ class HashMap{
             let newNode = new node({"key": key, "value": value})
             let list = new LinkedList(newNode)
             this.arr[hashCode] = list
-            return
+            //return
 
         }
 
@@ -62,7 +63,47 @@ class HashMap{
             //if it dosent, then append the key value pair to the linked list
             list.append({"key": key, "value": value})
         }
+        this.resize()
 
+    }
+
+    resize(){
+        let capacity = this.arr.length
+        let load_factor = 0.75
+
+        let thresHold = Math.ceil((capacity * load_factor))
+
+        let current_capacity = this.length()
+
+        if(current_capacity > thresHold){
+            let newLength = this.arr.length * 2
+            let newArray = new Array(newLength).fill(null);
+            
+            let tempList = []
+        
+            let j = this.arr.length
+            
+            for(let k = 0; k < j; k++){
+                let list = this.arr[k]
+                if(list == null){
+                    continue
+                }
+                let start = list.head
+                let length = list.size()
+                for(let i=0; i < length; i++){
+                        
+                    tempList.push([start.value["key"],start.value["value"]])
+                    start = start.nextNode
+                }
+            }
+            this.arr = newArray
+            for(let item of tempList){
+                let key = item[0]
+                let value = item[1]
+                this.set(key, value)
+            }
+
+        }
     }
 
     get(key){
@@ -150,12 +191,32 @@ class HashMap{
         if(checkFlag == false){
             return false
         }
-        
         list.removeAt(index)
         this.arr[hashCode] = list
 
     }
+    length(){
+        let tempList = []
+        
+        let j = this.arr.length
+        
+        for(let k = 0; k < j; k++){
+            let list = this.arr[k]
+            if(list == null){
+                continue
+            }
+            let start = list.head
+            let length = list.size()
+            for(let i=0; i < length; i++){
+                    
+                tempList.push(start.value["key"])
+                start = start.nextNode
+            }
+        }
 
+        return tempList.length
+        
+    }
     clear(){
         let i = 0
         for(var item of this.arr){
@@ -233,17 +294,47 @@ class HashMap{
 }
 
 const test = new HashMap()
-test.set('apple', 'red')
-test.set('grapes', 'purple')
 
-console.log(test.get('apple'))
-console.log(test.has('grapes'))
-//console.log(test.remove('grapes'))
-console.log(test.has('grapes'))
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+test.set('moon', 'silver')
+
+
 
 console.log(test.arr)
-console.log(test.keys())
-console.log(test.values())
 console.log(test.entries())
+console.log(test.arr.length)
+console.log(test.get('dog'))
+console.log(test.length())
+test.remove('dog')
+console.log(test.has('dog'))
+test.remove('apple')
+console.log(test.keys())
+console.log(test.entries())
+test.clear()
+console.log(test.arr)
 
 
+// const test = new HashMap()
+// test.set('apple', 'red')
+// test.set('grapes', 'purple')
+
+// console.log(test.get('apple'))
+// console.log(test.has('grapes'))
+// //console.log(test.remove('grapes'))
+// console.log(test.has('grapes'))
+
+// console.log(test.arr)
+// console.log(test.keys())
+// console.log(test.values())
+// console.log(test.entries())

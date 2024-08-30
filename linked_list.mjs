@@ -179,7 +179,17 @@ class LinkedList{
             }
             start = start.nextNode
         }
+        if(index == 0){
+            this.head = aheadNextNode
+            return
+        }
+        if(index == this.size()-1){
+            this.pop()
+            return
+        }
+        
         prevNextNode.nextNode = aheadNextNode
+
 
     }
 }
@@ -194,17 +204,18 @@ class node{
 export {LinkedList, node}
 
 //test cases
-// let list = new LinkedList()
+let list = new LinkedList()
 
-// list.append(8)
-// list.append(10)
-// list.append(12)
-// list.append(14)
-// list.append(16)
-// console.log(list.size())
-// console.log(list.head1())
-// console.log(list.tail())
-// console.log('index', list.at(0))
+list.append(8)
+list.append(10)
+list.append(12)
+list.append(14)
+list.append(16)
+console.log(list.size())
+console.log(list.head1())
+console.log(list.tail())
+console.log(list.removeAt(0))
+console.log(list)
 
 // console.log(list.contains(12))
 // console.log(list.find(8))
